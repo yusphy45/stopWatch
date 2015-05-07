@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>Stop Watch</title>
+    <style>
+        * {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            -ms-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+
+        section {
+            width: 600px;
+            margin: 100px auto;
+            font-family: sans-serif;
+        }
+
+        input {
+            display: none;
+        }
+
+        .box, .controller, .box .cell .num, .controller label {
+            text-align: center;
+        }
+
+        .box .cell, .controller label {
+            display: inline-block;
+        }
+
+        .box .cell {
+            width: 35px;
+            height: 35px;
+            overflow: hidden;
+        }
+
+        .box .cell .num {
+            display: block;
+            font-size: 35px;
+            line-height: 35px;
+            -webkit-animation-play-state: paused;
+            -moz-animation-play-state: paused;
+            -o-animation-play-state: paused;
+            animation-play-state: paused;
+        }
+
+        .controller {
+            margin-top: 30px;
+        }
+
+        .controller label {
+            border: 1px solid;
+            width: 83px;
+            padding: 10px;
+        }
+
+        @-webkit-keyframes ten {
+            0% {
+                margin-top: 0;
+            }
+            100% {
+                margin-top: -350px;
+            }
+        }
+
+        @-moz-keyframes ten {
+            0% {
+                margin-top: 0;
+            }
+            100% {
+                margin-top: -350px;
+            }
+        }
+
+        @-o-keyframes ten {
+            0% {
+                margin-top: 0;
+            }
+            100% {
+                margin-top: -350px;
+            }
+        }
+
+        @keyframes ten {
+            0% {
+                margin-top: 0;
+            }
+            100% {
+                margin-top: -350px;
+            }
+        }
+
+        @-webkit-keyframes sex {
+            0% {
+                margin-top: 0;
+            }
+            100% {
+                margin-top: -210px;
+            }
+        }
+
+        @-moz-keyframes sex {
+            0% {
+                margin-top: 0;
+            }
+            100% {
+                margin-top: -210px;
+            }
+        }
+
+        @-o-keyframes sex {
+            0% {
+                margin-top: 0;
+            }
+            100% {
+                margin-top: -210px;
+            }
+        }
+
+        @keyframes sex {
+            0% {
+                margin-top: 0;
+            }
+            100% {
+                margin-top: -210px;
+            }
+        }
+
+        .sex, .ten {
+            -webkit-animation-iteration-count: infinite;
+            -moz-animation-iteration-count: infinite;
+            -o-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+        }
+
+        .sex {
+            -webkit-animation-name: sex;
+            -moz-animation-name: sex;
+            -o-animation-name: sex;
+            animation-name: sex;
+            -webkit-animation-timing-function: steps(6);
+            -moz-animation-timing-function: steps(6);
+            -o-animation-timing-function: steps(6);
+            animation-timing-function: steps(6);
+        }
+
+        .ten {
+            -webkit-animation-name: ten;
+            -moz-animation-name: ten;
+            -o-animation-name: ten;
+            animation-name: ten;
+            -webkit-animation-timing-function: steps(10);
+            -moz-animation-timing-function: steps(10);
+            -o-animation-timing-function: steps(10);
+            animation-timing-function: steps(10);
+        }
+
+        .second_100 {
+            -webkit-animation-duration: .01s;
+            -moz-animation-duration: .01s;
+            -o-animation-duration: .01s;
+            animation-duration: .01s;
+        }
+
+        .second_10 {
+            -webkit-animation-duration: .1s;
+            -moz-animation-duration: .1s;
+            -o-animation-duration: .1s;
+            animation-duration: .1s;
+        }
+
+        .second_1 {
+            -webkit-animation-duration: 1s;
+            -moz-animation-duration: 1s;
+            -o-animation-duration: 1s;
+            animation-duration: 1s;
+        }
+
+        .second {
+            -webkit-animation-duration: 10s;
+            -moz-animation-duration: 10s;
+            -o-animation-duration: 10s;
+            animation-duration: 10s;
+        }
+
+        .ten_second {
+            -webkit-animation-duration: 60s;
+            -moz-animation-duration: 60s;
+            -o-animation-duration: 60s;
+            animation-duration: 60s;
+        }
+
+        .minute {
+            -webkit-animation-duration: 600s;
+            -moz-animation-duration: .01s;
+            -o-animation-duration: .01s;
+            animation-duration: .01s;
+        }
+
+        .ten_minute {
+            -webkit-animation-duration: 3600s;
+            -moz-animation-duration: 3600s;
+            -o-animation-duration: 3600s;
+            animation-duration: 3600s;
+        }
+
+        .hour {
+            -webkit-animation-duration: 36000s;
+            -moz-animation-duration: 36000s;
+            -o-animation-duration: 36000s;
+            animation-duration: 36000s;
+        }
+
+        .ten_hour {
+            -webkit-animation-duration: 360000s;
+            -moz-animation-duration: 360000s;
+            -o-animation-duration: 360000s;
+            animation-duration: 360000s;
+        }
+
+        input#start:checked ~ .box .num {
+            -webkit-animation-play-state: running;
+            -moz-animation-play-state: running;
+            -o-animation-play-state: running;
+            animation-play-state: running;
+        }
+
+        input#stop:checked ~ .box .num {
+            -webkit-animation-play-state: paused;
+            -moz-animation-play-state: paused;
+            -o-animation-play-state: paused;
+            animation-play-state: paused;
+        }
+
+        input#reset:checked ~ .box .num {
+            -webkit-animation: none;
+            -moz-animation: none;
+            -o-animation: none;
+            animation: none;
+        }
+    </style>
+</head>
+<body>
+<section>
+    <input type="radio" name="group" id="start">
+    <input type="radio" name="group" id="stop">
+    <input type="radio" name="group" id="reset">
+
+    <div class="box">
+        <div class="cell">
+            <span class="num ten ten_hour">0 1 2 3 4 5 6 7 8 9</span>
+        </div>
+        <div class="cell">
+            <span class="num ten hour">0 1 2 3 4 5 6 7 8 9</span>
+        </div>
+        <div class="cell">
+            <span class="num">:</span>
+        </div>
+        <div class="cell">
+            <span class="num sex ten_minute">0 1 2 3 4 5</span>
+        </div>
+        <div class="cell">
+            <span class="num ten minute">0 1 2 3 4 5 6 7 8 9</span>
+        </div>
+        <div class="cell">
+            <span class="num">:</span>
+        </div>
+        <div class="cell">
+            <span class="num sex ten_second">0 1 2 3 4 5</span>
+        </div>
+        <div class="cell">
+            <span class="num ten second">0 1 2 3 4 5 6 7 8 9</span>
+        </div>
+        <div class="cell">
+            <span class="num">:</span>
+        </div>
+        <div class="cell">
+            <span class="num ten second_1">0 1 2 3 4 5 6 7 8 9</span>
+        </div>
+        <div class="cell">
+            <span class="num ten second_10">0 1 2 3 4 5 6 7 8 9</span>
+        </div>
+        <div class="cell">
+            <span class="num ten second_100">0 1 2 3 4 5 6 7 8 9</span>
+        </div>
+    </div>
+
+    <div class="controller">
+        <label for="start">Start</label>
+        <label for="stop">Stop</label>
+        <label for="reset">Reset</label>
+    </div>
+</section>
+</body>
+</html>
